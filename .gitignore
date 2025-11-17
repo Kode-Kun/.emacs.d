@@ -1,0 +1,9 @@
+*~
+ido.last
+eln-cache/
+elpa/
+elpaca/
+lisp/
+auto-save-list/
+transient/
+url/
