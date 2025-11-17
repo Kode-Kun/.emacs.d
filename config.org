@@ -1,0 +1,177 @@
+#+TITLE: Kode's GNU Emacs config
+#+AUTHOR: Lui Sant'Ana Cardoso
+#+DESCRIPTION: My personal emacs config
+#+STARTUP: showeverything
+#+OPTIONS: toc:2
+
+* Third-party packages
+My emacs config tries to be pretty minimal, but there are still quite a few quality-of-life packages I installed.
+To get this running on a fresh install, install the following packages through MELPA:
+** Package list:
+ - rainbow-mode
+ - evil-mode
+ - which-key
+ - hl-todo
+ - move-text
+ - quasi-monochrome-theme
+
+* Important programs to load first
+
+** Add .emacs.d to load path
+
+#+begin_src emacs-lisp
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp"))
+#+end_src
+
+** Add Melpa to Package Manager
+
+#+begin_src emacs-lisp
+;; Set up melpa
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
+(package-initialize)
+;;(package-refresh-contents)
+#+end_src
+
+** Ido mode
+#+begin_src emacs-lisp
+(ido-mode 1)
+(ido-everywhere 1)
+#+end_src
+
+** Auto revert mode
+
+#+begin_src emacs-lisp
+(global-auto-revert-mode 1)
+(auto-revert-mode 1)
+#+end_src
+
+** Dired
+
+#+begin_src elisp
+(setq dired-dwim-target t)
+;; Auto-refresh dired on file change
+(add-hook 'dired-mode-hook 'auto-revert-mode)
+#+end_src
+
+** Load Evil Mode
+
+#+begin_src emacs-lisp
+;; Download Evil
+(unless (package-installed-p 'evil)
+  (package-install 'evil))
+;; Enable Evil
+(require 'evil)
+(evil-mode 1)
+;; Enable evil-collection
+(evil-collection-init)
+#+end_src
+
+** Load kode-mode
+*** My personal minor mode
+#+begin_src emacs-lisp
+(load-file "~/.emacs.d/kode-mode.el")
+#+end_src
+
+** Load Theme
+
+#+begin_src emacs-lisp
+;; Theming
+(load-theme 'quasi-monochrome t)
+(add-to-list 'default-frame-alist '(font . "DejaVuSansMono-15"))
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(global-display-line-numbers-mode)
+(setq display-line-numbers-type 'relative)
+
+; load org-bullets
+(require 'org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+#+end_src
+
+** Custom
+
+#+begin_src emacs-lisp
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(magit-bury-buffer-function 'magit-restore-window-configuration)
+ '(package-selected-packages '(evil-collection magit which-key evil)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+#+end_src
+
+** Load which-key
+> Package to show all possible completions when a keybinding is pressed
+
+#+begin_src emacs-lisp
+;; load which-key for keybinding completion / help
+(require 'which-key)
+(which-key-mode)
+#+end_src
+
+** Load hl-todo
+> Simple package for highlighting TODO and other similar comment tags
+
+#+begin_src emacs-lisp
+(require 'hl-todo)
+(global-hl-todo-mode)
+#+end_src
+
+** Load rainbow-mode
+> Highlights color codes with their respecive colors
+#+begin_src emacs-lisp
+(require 'rainbow-mode)
+(define-globalized-minor-mode my-global-rainbow-mode rainbow-mode
+  (lambda () (rainbow-mode 1)))
+
+(my-global-rainbow-mode 1)
+#+end_src
+
+** Load zig-mode
+#+begin_src emacs_lisp
+(unless (version< emacs-version "24")
+  (add-to-list 'load-path "~/.emacs.d/elpa/zig-mode-20240416.1636/")
+  (autoload 'zig-mode "zig-mode" nil t)
+  (add-to-list 'auto-mode-alist '("\\.zig\\'" . zig-mode)))
+#+end_src
+
+** GDB settings
+#+begin_src emacs_lisp
+(setq gdb-many-windows 't)
+#+end_src
+
+** Load move-text
+#+begin_src emacs_lisp
+(require 'move-text)
+#+end_src
+
+* Keybindings
+
+** global (kode-mode-map) keybindings (deprecated)
+
+#+begin_src emacs_lisp
+;; DEFINE kode-mode KEYBINDINGS IN kode-mode.el
+
+;;(require 'kode-mode)
+;;(define-key kode-mode-map (kbd "C-c C-c") 'compile)
+;;(define-key kode-mode-map (kbd "C-c C-f") 'comment-line)
+;;(define-key kode-mode-map (kbd "C-c C-d") 'comment-region)
+;; C-h m to list keybindings of current buffer
+#+end_src
+
+** hl-todo-mode keybindings (deprecated)
+
+#+begin_src emacs-lisp
+;;(define-key hl-todo-mode-map "\C-c n" 'hl-todo-previous)
+;;(define-key hl-todo-mode-map "\C-c p" 'hl-todo-previous)
+#+end_src
+
