@@ -20,6 +20,9 @@
 (defun turn-off-kode-mode ()
   "Turn off kode-mode."
   (kode-mode -1))
+
+;; kode-mode exceptions (modes and buffers where kode-mode should be disabled):
+(add-hook 'magit-mode-hook 'turn-off-kode-mode)
 (add-hook 'minibuffer-setup-hook 'turn-off-kode-mode)
 
 ;; here's where my custom keybindings, applied to all buffers, reside.
@@ -45,5 +48,8 @@
 (evil-define-key 'insert kode-mode-map (kbd "M-j") 'evil-next-line)
 (evil-define-key 'insert kode-mode-map (kbd "M-k") 'evil-previous-line)
 (evil-define-key 'insert kode-mode-map (kbd "M-l") 'evil-forward-char)
+
+;; keybindings applied only in visual mode
+(evil-define-key 'visual kode-mode-map (kbd "C-x C-c") 'evil-normal-state)
 
 (provide 'kode-mode)

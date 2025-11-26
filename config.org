@@ -45,14 +45,9 @@ To get this running on a fresh install, install the following packages through M
 #+begin_src emacs-lisp
 (global-auto-revert-mode 1)
 (auto-revert-mode 1)
-#+end_src
-
-** Dired
-
-#+begin_src elisp
-(setq dired-dwim-target t)
 ;; Auto-refresh dired on file change
 (add-hook 'dired-mode-hook 'auto-revert-mode)
+(add-hook 'magit-mode-hook 'auto-revert-mode)
 #+end_src
 
 ** Load Evil Mode
@@ -105,7 +100,7 @@ To get this running on a fresh install, install the following packages through M
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(magit-bury-buffer-function 'magit-restore-window-configuration)
- '(package-selected-packages '(evil-collection magit which-key evil)))
+ '(package-selected-packages '(evil evil-collection magit rainbow-delimiters which-key)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -114,6 +109,8 @@ To get this running on a fresh install, install the following packages through M
  )
 #+end_src
 
+* Less important packages
+more for small QoL and visual improvements than substantial changes
 ** Load which-key
 > Package to show all possible completions when a keybinding is pressed
 
@@ -147,6 +144,13 @@ To get this running on a fresh install, install the following packages through M
   (add-to-list 'load-path "~/.emacs.d/elpa/zig-mode-20240416.1636/")
   (autoload 'zig-mode "zig-mode" nil t)
   (add-to-list 'auto-mode-alist '("\\.zig\\'" . zig-mode)))
+#+end_src
+
+** SLIME
+The IDE for common lisp.
+#+begin_src emacs_lisp
+(load (expand-file-name "~/.quicklisp/slime-helper.el"))
+(setq inferior-lisp-program "sbcl")
 #+end_src
 
 ** GDB settings
