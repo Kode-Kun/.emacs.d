@@ -9,3 +9,5 @@ lisp/
 auto-save-list/
 transient/
 url/
+eshell/
+projects
