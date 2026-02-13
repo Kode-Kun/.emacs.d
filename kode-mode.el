@@ -21,15 +21,30 @@
   "Turn off kode-mode."
   (kode-mode -1))
 
+(defun open-eshell-below ()
+  "Open an eshell buffer in a new window"
+  (interactive)
+  (split-window-below)
+  (other-window 1)
+  (eshell))
+
+(defun open-eshell-right ()
+  "Open an eshell buffer in a new window"
+  (interactive)
+  (split-window-right)
+  (other-window 1)
+  (eshell))
+
 ;; kode-mode exceptions (modes and buffers where kode-mode should be disabled):
 (add-hook 'magit-mode-hook 'turn-off-kode-mode)
 (add-hook 'minibuffer-setup-hook 'turn-off-kode-mode)
 
 ;; here's where my custom keybindings, applied to all buffers, reside.
+(define-key kode-mode-map (kbd "C-c e")   'open-eshell-below)
+(define-key kode-mode-map (kbd "C-c s")   'open-eshell-right)
 (define-key kode-mode-map (kbd "C-c C-c") 'compile)
-(define-key kode-mode-map (kbd "C-c C-f") 'comment-line)
-(define-key kode-mode-map (kbd "C-c C-d") 'uncomment-region)
-(define-key kode-mode-map (kbd "C-c C-s") 'comment-indent)
+(define-key kode-mode-map (kbd "C-c C-f") 'comment-region)
+(define-key kode-mode-map (kbd "C-c C-d") 'comment-indent)
 (define-key kode-mode-map (kbd "C-x C-h") 'previous-buffer)
 (define-key kode-mode-map (kbd "C-x C-l") 'next-buffer)
 (define-key kode-mode-map (kbd "C-x C-s") 'scratch-buffer)
