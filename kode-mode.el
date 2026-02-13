@@ -48,6 +48,7 @@
 (define-key kode-mode-map (kbd "C-x C-h") 'previous-buffer)
 (define-key kode-mode-map (kbd "C-x C-l") 'next-buffer)
 (define-key kode-mode-map (kbd "C-x C-s") 'scratch-buffer)
+(define-key kode-mode-map (kbd "C-x C-q") 'delete-frame)
 
 ;; unbinding certain annoying keybindings (I use C-x C-c way too often for
 ;; it to kill emacs if I'm in the wrong evil stage...

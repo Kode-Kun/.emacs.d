@@ -6,7 +6,8 @@
 
 * Third-party packages
 My emacs config tries to be pretty minimal, but there are still quite a few quality-of-life packages I installed.
-To get this running on a fresh install, install the following packages through MELPA:
+This list is outdated and useless because all the actual packages that are needed
+are installed below! I keep it because it looks cool. I guess.
 ** Package list:
  - company-mode
  - rainbow-mode
@@ -32,7 +33,30 @@ To get this running on a fresh install, install the following packages through M
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
-;;(package-refresh-contents)
+#+end_src
+
+** Helper function to install packages on first boot
+#+begin_src emacs-lisp
+(defun ensure-package (package)
+  "Install PACKAGE if it is not already installed."
+  (unless (package-installed-p package)
+    (package-install package)))
+#+end_src
+
+*** We ensure every package needed is installed before proceeding with the config                      :remove:
+#+begin_src emacs-lisp
+(ensure-package 'evil)
+(ensure-package 'evil-collection)
+(ensure-package 'magit)
+(ensure-package 'company)
+(ensure-package 'quasi-monochrome-theme)
+(ensure-package 'rainbow-mode)
+(ensure-package 'which-key)
+(ensure-package 'org-bullets)
+(ensure-package 'rainbow-mode)
+(ensure-package 'move-text)
+(ensure-package 'hl-todo)
+(package-refresh-contents)
 #+end_src
 
 ** Ido mode
@@ -54,12 +78,9 @@ To get this running on a fresh install, install the following packages through M
 ** Load Evil Mode
 
 #+begin_src emacs-lisp
-;; Download Evil
-(unless (package-installed-p 'evil)
-  (package-install 'evil))
 ;; Enable Evil
-(setq evil-want-keybinding nil)
 (require 'evil)
+(setq evil-want-keybinding nil)
 (evil-mode 1)
 ;; Enable evil-collection
 (evil-collection-init)
@@ -90,6 +111,7 @@ To get this running on a fresh install, install the following packages through M
 ; load org-bullets
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+(setq org-edit-src-content-indentation 0)
 #+end_src
 
 ** Custom
