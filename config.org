@@ -80,8 +80,8 @@ are installed below! I keep it because it looks cool. I guess.
 
 #+begin_src emacs-lisp
 ;; Enable Evil
-(require 'evil)
 (setq evil-want-keybinding nil)
+(require 'evil)
 (evil-mode 1)
 ;; Enable evil-collection
 (evil-collection-init)
@@ -175,7 +175,7 @@ company-mode configuration (company-backends) is done in the Custom section
 #+end_src
 
 ** Load zig-mode
-#+begin_src emacs_lisp
+#+begin_src emacs-lisp
 (unless (version< emacs-version "24")
   (add-to-list 'load-path "~/.emacs.d/elpa/zig-mode-20240416.1636/")
   (autoload 'zig-mode "zig-mode" nil t)
@@ -184,18 +184,18 @@ company-mode configuration (company-backends) is done in the Custom section
 
 ** SLIME
 The IDE for common lisp.
-#+begin_src emacs_lisp
-(load (expand-file-name "~/.quicklisp/slime-helper.el"))
-(setq inferior-lisp-program "sbcl")
+#+begin_src emacs-lisp
+;;(load (expand-file-name "~/.quicklisp/slime-helper.el"))
+;;(setq inferior-lisp-program "sbcl")
 #+end_src
 
 ** GDB settings
-#+begin_src emacs_lisp
+#+begin_src emacs-lisp
 (setq gdb-many-windows 't)
 #+end_src
 
 ** Load move-text
-#+begin_src emacs_lisp
+#+begin_src emacs-lisp
 (require 'move-text)
 #+end_src
 
@@ -203,7 +203,7 @@ The IDE for common lisp.
 
 ** global (kode-mode-map) keybindings (deprecated)
 
-#+begin_src emacs_lisp
+#+begin_src emacs-lisp
 ;; DEFINE kode-mode KEYBINDINGS IN kode-mode.el
 
 ;;(require 'kode-mode)
