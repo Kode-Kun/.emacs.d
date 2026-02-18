@@ -57,7 +57,8 @@ are installed below! I keep it because it looks cool. I guess.
 (ensure-package 'move-text)
 (ensure-package 'hl-todo)
 ;;(ensure-package 'flycheck)
-(package-refresh-contents)
+;; UNCOMMENT THIS IF ON A FRESH INSTALL:
+;;(package-refresh-contents)
 #+end_src
 
 ** Ido mode
