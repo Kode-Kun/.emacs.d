@@ -42,16 +42,13 @@
    Otherwise: compile."
   (interactive)
   (cond
-   ;; 1. Handle WDired
    ((derived-mode-p 'wdired-mode)
     (wdired-finish-edit))
    
-   ;; 2. Handle Magit Commit (uses with-editor)
    ((or (derived-mode-p 'git-commit-mode)
         (bound-and-true-p with-editor-mode))
     (with-editor-finish nil))
 
-   ;; 3. Default: standard compile command
    (t 
     (call-interactively 'compile))))
 
