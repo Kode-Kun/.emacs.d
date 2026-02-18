@@ -35,6 +35,26 @@
   (other-window 1)
   (eshell))
 
+(defun smart-compile ()
+  "Context-aware compile. 
+   In wdired: finish edit. 
+   In magit-commit: finish commit.
+   Otherwise: compile."
+  (interactive)
+  (cond
+   ;; 1. Handle WDired
+   ((derived-mode-p 'wdired-mode)
+    (wdired-finish-edit))
+   
+   ;; 2. Handle Magit Commit (uses with-editor)
+   ((or (derived-mode-p 'git-commit-mode)
+        (bound-and-true-p with-editor-mode))
+    (with-editor-finish nil))
+
+   ;; 3. Default: standard compile command
+   (t 
+    (call-interactively 'compile))))
+
 ;; kode-mode exceptions (modes and buffers where kode-mode should be disabled):
 (add-hook 'magit-mode-hook 'turn-off-kode-mode)
 (add-hook 'minibuffer-setup-hook 'turn-off-kode-mode)
@@ -42,7 +62,7 @@
 ;; here's where my custom keybindings, applied to all buffers, reside.
 (define-key kode-mode-map (kbd "C-c e")   'open-eshell-below)
 (define-key kode-mode-map (kbd "C-c s")   'open-eshell-right)
-(define-key kode-mode-map (kbd "C-c C-c") 'compile)
+(define-key kode-mode-map (kbd "C-c C-c") 'smart-compile)
 (define-key kode-mode-map (kbd "C-c C-f") 'comment-region)
 (define-key kode-mode-map (kbd "C-c C-d") 'comment-indent)
 (define-key kode-mode-map (kbd "C-x C-h") 'previous-buffer)

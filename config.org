@@ -101,7 +101,7 @@ are installed below! I keep it because it looks cool. I guess.
 ;; On Linux:
 ;;(add-to-list 'default-frame-alist '(font . "DejaVuSansMono-15"))
 ;; On Mac:
-(set-face-attribute 'default nil :height 170)
+(set-face-attribute 'default nil :height 130)
 (setq inhibit-startup-screen t)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
