@@ -56,7 +56,7 @@ are installed below! I keep it because it looks cool. I guess.
 (ensure-package 'rainbow-mode)
 (ensure-package 'move-text)
 (ensure-package 'hl-todo)
-(ensure-package 'flycheck)
+;;(ensure-package 'flycheck)
 (package-refresh-contents)
 #+end_src
 
