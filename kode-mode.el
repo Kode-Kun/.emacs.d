@@ -57,6 +57,8 @@
 ;; keybindings applied only in normal mode (evil stage)
 (evil-define-key 'normal kode-mode-map (kbd "M-j")     'move-text-down)
 (evil-define-key 'normal kode-mode-map (kbd "M-k")     'move-text-up)
+(evil-define-key 'normal kode-mode-map (kbd "C-j")     'scroll-up-command)
+(evil-define-key 'normal kode-mode-map (kbd "C-k")     'scroll-down-command)
 
 ;; keybindings applied only in insert mode
 (evil-define-key 'insert kode-mode-map (kbd "C-x C-c") 'evil-normal-state)
