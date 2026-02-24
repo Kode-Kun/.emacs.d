@@ -60,6 +60,9 @@ are installed below! I keep it because it looks cool. I guess.
 ;;(ensure-package 'flycheck)
 ;; UNCOMMENT THIS IF ON A FRESH INSTALL:
 ;;(package-refresh-contents)
+(ensure-package 'markdown-mode)
+(ensure-package 'markdown-preview-eww)
+(ensure-package 'markdown-preview-mode)
 #+end_src
 
 ** Ido mode
@@ -89,12 +92,6 @@ are installed below! I keep it because it looks cool. I guess.
 (evil-collection-init)
 #+end_src
 
-** Load kode-mode
-*** My personal minor mode
-#+begin_src emacs-lisp
-(load-file "~/.emacs.d/kode-mode.el")
-#+end_src
-
 ** Load Theme
 
 #+begin_src emacs-lisp
@@ -103,13 +100,14 @@ are installed below! I keep it because it looks cool. I guess.
 ;; On Linux:
 ;;(add-to-list 'default-frame-alist '(font . "DejaVuSansMono-15"))
 ;; On Mac:
-(set-face-attribute 'default nil :height 130)
+(set-face-attribute 'default nil :height 170)
 (setq inhibit-startup-screen t)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (global-display-line-numbers-mode)
 (setq display-line-numbers-type 'relative)
+(setq ring-bell-function 'ignore)
 
 ; load org-bullets
 (require 'org-bullets)
@@ -134,7 +132,7 @@ are installed below! I keep it because it looks cool. I guess.
  '(package-selected-packages
    '(company evil-collection flycheck hl-todo magit move-text org-bullets
 	     quasi-monochrome-theme rainbow-mode)))
- '(package-selected-packages nil))
+ '(package-selected-packages nil)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -205,6 +203,12 @@ The IDE for common lisp.
 #+end_src
 
 * Keybindings
+
+** Load kode-mode
+*** My personal minor mode
+#+begin_src emacs-lisp
+(load-file "~/.emacs.d/kode-mode.el")
+#+end_src
 
 ** global (kode-mode-map) keybindings (deprecated)
 

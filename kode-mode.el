@@ -68,8 +68,10 @@
 (define-key kode-mode-map (kbd "C-x C-q") 'delete-frame)
 
 ;; unbinding certain annoying keybindings (I use C-x C-c way too often for
-;; it to kill emacs if I'm in the wrong evil stage...
+;; it to kill emacs if I'm in the wrong evil stage...)
 (define-key global-map (kbd "C-x C-c") 'nil)
+(define-key global-map (kbd "M-j") 'nil)
+(define-key global-map (kbd "M-k") 'nil)
 
 ;; keybindings applied only in normal mode (evil stage)
 (evil-define-key 'normal kode-mode-map (kbd "M-j")     'move-text-down)
@@ -86,5 +88,9 @@
 
 ;; keybindings applied only in visual mode
 (evil-define-key 'visual kode-mode-map (kbd "C-x C-c") 'evil-normal-state)
+
+;; keybindings applied only to specific modes
+(define-key minibuffer-mode-map (kbd "M-j") 'ido-next-match)
+(define-key minibuffer-mode-map (kbd "M-k") 'ido-prev-match)
 
 (provide 'kode-mode)
