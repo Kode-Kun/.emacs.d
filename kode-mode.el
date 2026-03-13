@@ -94,4 +94,9 @@
 (define-key minibuffer-mode-map (kbd "M-j") 'ido-next-match)
 (define-key minibuffer-mode-map (kbd "M-k") 'ido-prev-match)
 
+;; Other keybindings I use a lot (dont forget these!):
+;; "+" in dired (normal mode): create directory
+;; "C-x w d": toggle window to dedicated (won't change buffers)
+;; "g r" in magit: reload magit
+
 (provide 'kode-mode)
