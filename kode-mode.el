@@ -62,6 +62,7 @@
 (define-key kode-mode-map (kbd "C-c C-c") 'smart-compile)
 (define-key kode-mode-map (kbd "C-c C-v") 'grep)
 (define-key kode-mode-map (kbd "C-c C-f") 'comment-region)
+(define-key kode-mode-map (kbd "C-c C-S-f") 'uncomment-region)
 (define-key kode-mode-map (kbd "C-c C-d") 'comment-indent)
 (define-key kode-mode-map (kbd "C-x C-h") 'previous-buffer)
 (define-key kode-mode-map (kbd "C-x C-l") 'next-buffer)
@@ -100,5 +101,6 @@
 ;; "+" in dired (normal mode): create directory
 ;; "C-x w d": toggle window to dedicated (won't change buffers)
 ;; "g r" in magit: reload magit
+;; read later: https://tuhdo.github.io/c-ide.html#sec-2
 
 (provide 'kode-mode)
