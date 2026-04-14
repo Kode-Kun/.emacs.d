@@ -1,6 +1,7 @@
 *~
 ido.last
 config.el
+chasm-mode.el
 quasi-monochrome-theme.el
 session.*
 eln-cache/
@@ -11,4 +12,4 @@ auto-save-list/
 transient/
 url/
 eshell/
-projects
+projects/

@@ -211,30 +211,15 @@ The IDE for common lisp.
 (require 'move-text)
 #+end_src
 
-* Keybindings
+* Custom modes
 
 ** Load kode-mode
 *** My personal minor mode
 #+begin_src emacs-lisp
 (load-file "~/.emacs.d/kode-mode.el")
 #+end_src
-
-** global (kode-mode-map) keybindings (deprecated)
-
+** Load chasm-mode
+*** A simple major mode for editing chasm files
 #+begin_src emacs-lisp
-;; DEFINE kode-mode KEYBINDINGS IN kode-mode.el
-
-;;(require 'kode-mode)
-;;(define-key kode-mode-map (kbd "C-c C-c") 'compile)
-;;(define-key kode-mode-map (kbd "C-c C-f") 'comment-line)
-;;(define-key kode-mode-map (kbd "C-c C-d") 'comment-region)
-;; C-h m to list keybindings of current buffer
+(load-file "~/.emacs.d/chasm-mode.el")
 #+end_src
-
-** hl-todo-mode keybindings (deprecated)
-
-#+begin_src emacs-lisp
-;;(define-key hl-todo-mode-map "\C-c n" 'hl-todo-previous)
-;;(define-key hl-todo-mode-map "\C-c p" 'hl-todo-previous)
-#+end_src
-
