@@ -39,6 +39,7 @@
   "Context-aware compile.
    In wdired: finish edit.
    In magit-commit: finish commit.
+   In rust-mode: rust-compile.
    Otherwise: compile."
   (interactive)
   (cond
@@ -48,6 +49,9 @@
    ((or (derived-mode-p 'git-commit-mode)
         (bound-and-true-p with-editor-mode))
     (with-editor-finish nil))
+
+   ((derived-mode-p 'rust-mode)
+	(call-interactively 'rust-compile))
 
    (t
     (call-interactively 'compile))))

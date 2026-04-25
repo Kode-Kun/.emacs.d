@@ -51,6 +51,7 @@ are installed below! I keep it because it looks cool. I guess.
 (ensure-package 'magit)
 (ensure-package 'company)
 (ensure-package 'company-c-headers)
+(ensure-package 'rust-mode)
 (ensure-package 'quasi-monochrome-theme)
 (ensure-package 'rainbow-mode)
 (ensure-package 'which-key)
