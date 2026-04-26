@@ -52,6 +52,8 @@ are installed below! I keep it because it looks cool. I guess.
 (ensure-package 'company)
 (ensure-package 'company-c-headers)
 (ensure-package 'rust-mode)
+(ensure-package 'cargo-mode)
+(ensure-package 'exec-path-from-shell)
 (ensure-package 'quasi-monochrome-theme)
 (ensure-package 'rainbow-mode)
 (ensure-package 'which-key)
@@ -98,6 +100,12 @@ are installed below! I keep it because it looks cool. I guess.
 #+begin_src emacs-lisp
 ;; make dired try to guess the target when moving / copying
 (setq dired-dwim-target 't)
+#+end_src
+
+** Force emacs to use our PATH when loading up
+#+begin_src emacs-lisp
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
 #+end_src
 
 ** Load Theme

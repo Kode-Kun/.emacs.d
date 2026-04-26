@@ -1,6 +1,10 @@
 ;; My custom minor mode, mainly used for overriding keybindings.
 
 (require 'move-text)
+(require 'rust-mode)
+(require 'evil-mode)
+(require 'cargo-mode)
+
 (defvar kode-mode-map (make-sparse-keymap)
   "Keymap for 'kode-mode'.")
 
@@ -35,11 +39,23 @@
   (other-window 1)
   (eshell))
 
+(defun dired-at-point ()
+  "Open dired on the path at point.
+   If the path is a file, open its parent directory."
+  (interactive)
+  (let ((path (thing-at-point 'filename t)))
+    (if path
+        (let ((expanded-path (expand-file-name path)))
+          (if (file-directory-p expanded-path)
+              (dired expanded-path)
+            (dired (file-name-directory expanded-path))))
+      (message "No path found at point"))))
+
 (defun smart-compile ()
   "Context-aware compile.
    In wdired: finish edit.
    In magit-commit: finish commit.
-   In rust-mode: rust-compile.
+   In rust-mode: execute cargo commands.
    Otherwise: compile."
   (interactive)
   (cond
@@ -51,7 +67,7 @@
     (with-editor-finish nil))
 
    ((derived-mode-p 'rust-mode)
-	(call-interactively 'rust-compile))
+	(call-interactively 'cargo-mode-execute-task))
 
    (t
     (call-interactively 'compile))))
@@ -63,11 +79,13 @@
 ;; here's where my custom keybindings, applied to all buffers, reside.
 (define-key kode-mode-map (kbd "C-c e")     'open-eshell-below)
 (define-key kode-mode-map (kbd "C-c s")     'open-eshell-right)
+(define-key kode-mode-map (kbd "C-c m")     'magit)
 (define-key kode-mode-map (kbd "C-c C-c")   'smart-compile)
+(define-key kode-mode-map (kbd "C-c C-e")   'eval-buffer)
 (define-key kode-mode-map (kbd "C-c C-v")   'grep)
-(define-key kode-mode-map (kbd "C-c C-f")   'comment-region)
 (define-key kode-mode-map (kbd "C-c C-S-f") 'uncomment-region)
-(define-key kode-mode-map (kbd "C-c C-d")   'comment-indent)
+(define-key kode-mode-map (kbd "C-c C-d")   'dired-at-point)
+(define-key kode-mode-map (kbd "C-c C-f")   'find-file-at-point)
 (define-key kode-mode-map (kbd "C-x C-h")   'previous-buffer)
 (define-key kode-mode-map (kbd "C-x C-l")   'next-buffer)
 (define-key kode-mode-map (kbd "C-x C-s")   (lambda () (interactive) (switch-to-buffer "*scratch*")))
@@ -80,8 +98,9 @@
 (define-key global-map (kbd "s-x") 'nil)
 
 ;; keybindings applied only in normal mode (evil stage)
-(evil-define-key 'normal kode-mode-map (kbd "M-j")     'move-text-down)
-(evil-define-key 'normal kode-mode-map (kbd "M-k")     'move-text-up)
+;; these bindings arent needed when im using my split keyboard
+;(evil-define-key 'normal kode-mode-map (kbd "M-j")     'move-text-down)
+;(evil-define-key 'normal kode-mode-map (kbd "M-k")     'move-text-up)
 (evil-define-key 'normal kode-mode-map (kbd "C-j")     'scroll-up-command)
 (evil-define-key 'normal kode-mode-map (kbd "C-k")     'scroll-down-command)
 (evil-define-key 'normal kode-mode-map (kbd "C-c +")   'evil-numbers/inc-at-pt)
