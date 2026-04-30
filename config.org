@@ -52,7 +52,6 @@ are installed below! I keep it because it looks cool. I guess.
 (ensure-package 'company)
 (ensure-package 'company-c-headers)
 (ensure-package 'rust-mode)
-(ensure-package 'cargo-mode)
 (ensure-package 'exec-path-from-shell)
 (ensure-package 'quasi-monochrome-theme)
 (ensure-package 'rainbow-mode)
@@ -100,12 +99,20 @@ are installed below! I keep it because it looks cool. I guess.
 #+begin_src emacs-lisp
 ;; make dired try to guess the target when moving / copying
 (setq dired-dwim-target 't)
+(setq-default compile-command "")
+(setq-default dired-listing-switches "-alh")
+
+;; change compile command to start with 'cargo' when in rust-mode
+(add-hook 'rust-mode-hook
+  (lambda ()
+    (setq-local compile-command "cargo ")))
 #+end_src
 
-** Force emacs to use our PATH when loading up
+** Force emacs to use our PATH when loading up and load environment variables
 #+begin_src emacs-lisp
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
+(setenv "BROWSER" "firefox")
 #+end_src
 
 ** Load Theme

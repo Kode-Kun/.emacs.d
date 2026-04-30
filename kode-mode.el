@@ -2,8 +2,7 @@
 
 (require 'move-text)
 (require 'rust-mode)
-(require 'evil-mode)
-(require 'cargo-mode)
+(require 'evil)
 
 (defvar kode-mode-map (make-sparse-keymap)
   "Keymap for 'kode-mode'.")
@@ -66,9 +65,6 @@
         (bound-and-true-p with-editor-mode))
     (with-editor-finish nil))
 
-   ((derived-mode-p 'rust-mode)
-	(call-interactively 'cargo-mode-execute-task))
-
    (t
     (call-interactively 'compile))))
 
@@ -81,7 +77,7 @@
 (define-key kode-mode-map (kbd "C-c s")     'open-eshell-right)
 (define-key kode-mode-map (kbd "C-c m")     'magit)
 (define-key kode-mode-map (kbd "C-c C-c")   'smart-compile)
-(define-key kode-mode-map (kbd "C-c C-e")   'eval-buffer)
+(define-key kode-mode-map (kbd "C-c C-e")   'eval-region)
 (define-key kode-mode-map (kbd "C-c C-v")   'grep)
 (define-key kode-mode-map (kbd "C-c C-S-f") 'uncomment-region)
 (define-key kode-mode-map (kbd "C-c C-d")   'dired-at-point)
@@ -96,11 +92,12 @@
 (define-key global-map (kbd "M-j") 'nil)
 (define-key global-map (kbd "M-k") 'nil)
 (define-key global-map (kbd "s-x") 'nil)
+(define-key global-map (kbd "C-_") 'nil)
+(define-key evil-motion-state-map (kbd "\\") 'nil)
 
 ;; keybindings applied only in normal mode (evil stage)
-;; these bindings arent needed when im using my split keyboard
-;(evil-define-key 'normal kode-mode-map (kbd "M-j")     'move-text-down)
-;(evil-define-key 'normal kode-mode-map (kbd "M-k")     'move-text-up)
+(evil-define-key 'normal kode-mode-map (kbd "M-k")     'move-text-up)
+(evil-define-key 'normal kode-mode-map (kbd "M-j")     'move-text-down)
 (evil-define-key 'normal kode-mode-map (kbd "C-j")     'scroll-up-command)
 (evil-define-key 'normal kode-mode-map (kbd "C-k")     'scroll-down-command)
 (evil-define-key 'normal kode-mode-map (kbd "C-c +")   'evil-numbers/inc-at-pt)
@@ -108,10 +105,11 @@
 
 ;; keybindings applied only in insert mode
 (evil-define-key 'insert kode-mode-map (kbd "C-x C-c") 'evil-normal-state)
-(evil-define-key 'insert kode-mode-map (kbd "M-h")     'left-char)
-(evil-define-key 'insert kode-mode-map (kbd "M-j")     'next-line)
-(evil-define-key 'insert kode-mode-map (kbd "M-k")     'previous-line)
-(evil-define-key 'insert kode-mode-map (kbd "M-l")     'right-char)
+;; these bindings arent needed when im using my split keyboard
+;;(evil-define-key 'insert kode-mode-map (kbd "M-h")     'left-char)
+;;(evil-define-key 'insert kode-mode-map (kbd "M-j")     'next-line)
+;;(evil-define-key 'insert kode-mode-map (kbd "M-k")     'previous-line)
+;;(evil-define-key 'insert kode-mode-map (kbd "M-l")     'right-char)
 (evil-define-key 'insert kode-mode-map (kbd "C-p")     'evil-paste-after)
 
 ;; keybindings applied only in visual mode
