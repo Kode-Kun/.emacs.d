@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;; WARNING: chasm-mode.el needs to be present in ~/emacs.d/lisp
 ;; it's available at https://github.com/kode-tar-gz/chasm-mode
 
@@ -143,10 +144,13 @@
 ;; ----- our color themes! -----
 (use-package quasi-monochrome-theme)
 (use-package doom-themes
-  :ensure t
+  :ensure t :defer t
   :custom
   (doom-themes-enable-bold t)
-  (doom-themes-enable-italic t))
+  (doom-themes-enable-italic t)
+  :config
+  (setcdr (assoc 'gnus-group-news-low-empty doom-themes-base-faces)
+          '(:inherit 'gnus-group-mail-1-empty :weight 'normal)))
 
 ;; ----- which-key: helper for showing possible key combinations -----
 (use-package which-key
@@ -212,6 +216,5 @@
 
 (setq gdb-many-windows 't)
 (setq make-backup-files nil)
-(server-start)
 
 (provide 'config)
